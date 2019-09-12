@@ -25,8 +25,8 @@
 </template>
 
 <script>
-import {mapGetters, mapState} from 'vuex'
 import { saveAs } from 'file-saver';
+import { mapState } from 'vuex'
 
 export default {
 	name: 'SVGs',
@@ -35,6 +35,8 @@ export default {
 		imageRoot: `./icons/`,
 	}),
 	methods: {
+		...mapState(['folder']),
+
 		getUnicode(index) {
 			if(index >= 0 && index < 26) {
 				return `&#${97+index};`
@@ -46,8 +48,8 @@ export default {
 		},
 		generateJSON() {
 			let json = {
-				id: 'ATC-Font',
-				familyname: 'ATC Font',
+				id: this.folder,
+				familyname: this.folder,
 				charmap:[]
 			};
 			for (let i = 0; i < this.svgs.length; i++) {	
