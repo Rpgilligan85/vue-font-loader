@@ -29,7 +29,7 @@ export default {
   },
   data: () => ({
 	  files:null,
-	  folderNames:['SVGs','FontAwesome']
+	  folderNames:['SVGs','Font Awesome']
   }),
   computed: {
 	...mapActions(['updateSvgs','updateFolder']),
