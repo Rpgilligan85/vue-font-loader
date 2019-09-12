@@ -1,18 +1,21 @@
 <template>
-<div>
-	<v-row justify="center" align="center">
+<div v-if="svgs">
+	<v-row>
 		<v-col
 			v-for="(item, index) in svgs"
 			:key="index"
+			cols="1"
 		>
 			<div class="svg">
-				<!-- <v-img
-					:src="imageRoot + item.name"
+				<v-img
+					:src="imageRoot + folder + '/' + item"
 					max-height="50"
 					max-width="50"
-				/> -->
-				<p v-html="getUnicode(index)"></p>
+					min-height="50"
+					min-width="50"
+				/>
 			</div>
+				<p class="charCode" v-html="getUnicode(index)"></p>
 		</v-col>
 	</v-row>
 	<v-row>
@@ -27,15 +30,12 @@ import { saveAs } from 'file-saver';
 
 export default {
 	name: 'SVGs',
-	props:['svgs'],
+	props:['svgs', 'folder'],
 	data: () => ({
-		imageRoot: './icons/SVGs/',
+		imageRoot: `./icons/`,
 	}),
 	methods: {
-		...mapGetters(['getSvgs']),
-
 		getUnicode(index) {
-			console.log(index);
 			if(index >= 0 && index < 26) {
 				return `&#${97+index};`
 			} else if (index >= 26 && index < 52 ) {
@@ -51,10 +51,10 @@ export default {
 				charmap:[]
 			};
 			for (let i = 0; i < this.svgs.length; i++) {	
-				json.charmap.push({
-					file: this.svgs[i].name,
+				 json.charmap.push({
+					file: this.svgs[i],
 					unicode: this.getUnicode(i)
-				})			
+				})	 	
 			}
 			console.log('json',json);
 			this.saveFile(json)
@@ -86,7 +86,14 @@ export default {
 		justify-content: center;
 		align-items: center;
 		padding: 10px;
+		border-radius: 5px 5px 0 0;
+	}
 
+	.charCode {
+		text-align: center;
+		background: #111;
+		color: #fff;
+		border-radius: 0 0 5px 5px;
 	}
 
 </style>

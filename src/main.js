@@ -1,3 +1,6 @@
+window.$ = require('jquery')
+window.JQuery = require('jquery')
+
 import Vue from 'vue'
 import App from './App.vue'
 import store from './store'
