@@ -6,11 +6,11 @@
 			:key="index"
 		>
 			<div class="svg">
-				<v-img
+				<!-- <v-img
 					:src="imageRoot + item.name"
 					max-height="50"
 					max-width="50"
-				/>
+				/> -->
 				<p v-html="getUnicode(index)"></p>
 			</div>
 		</v-col>
@@ -35,7 +35,14 @@ export default {
 		...mapGetters(['getSvgs']),
 
 		getUnicode(index) {
-			return `&#${97+index};`
+			console.log(index);
+			if(index >= 0 && index < 26) {
+				return `&#${97+index};`
+			} else if (index >= 26 && index < 52 ) {
+				return `&#${39+index};`
+			} else {
+				return `&#${-4+index};`
+			}
 		},
 		generateJSON() {
 			let json = {
