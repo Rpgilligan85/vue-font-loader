@@ -43,17 +43,15 @@ export default {
 	loadLocal(folder) {
 		this.$store.dispatch("updateSvgs", []);
 		$.ajax({
-			url : 'http://localhost/public/php/scandir.php',
+			url : `${window.location.protocol}//${window.location.hostname}/public/php/scandir.php`,
 			type: 'POST',
 			data: { folder },
-			//dataType: 'JSON',
 			success: (data) => {
 				let json = JSON.parse(data);
 				let arr = [];
 				for (let i = 0; i < json.length; i++) {
 					json[i].indexOf('svg') != -1 ? arr.push(json[i]) : null;
 				}
-					console.log('arr',arr);
 					this.$store.dispatch("updateSvgs", arr);
 			}
 		});
